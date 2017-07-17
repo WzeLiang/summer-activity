@@ -1,12 +1,9 @@
-﻿<html>
+<html>
 <head>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="src/bootstrap.min.css">
-    <!--[if IE]>
-	<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
-    <![endif]-->
     <style>
         body {
             background: url("./img/activity.jpg") no-repeat;
@@ -92,26 +89,23 @@
 <body>
 
 
-<img class="img-responsive" id="imga"
-     src="img/activity.jpg"
-     border="0" usemap="#planetmap"
-     alt="Planets"/>
-
-<map name="planetmap" id="planetmap">
 
 
-    <area id="read"
-          shape="rect"
-          coords="500,500,320,220"
-          href="javascript:;"
+<div name="planetmap" id="planetmap">
 
-          alt="Sun"/>
-    <area id="buy"
-          shape="rect"
-          coords="500,500,320,220"
-          href="javascript:;"
-          alt="Sun"/>
-</map>
+
+    <div id="read"
+
+
+         href="javascript:;"
+
+         alt="Sun"/></div>
+<div id="buy"
+
+
+     href="javascript:;"
+     alt="Sun"/></map>
+</div>
 <div class="modal fade" id="active-cont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -146,7 +140,7 @@
                 backdrop: true,
                 keyboard: false,
             })
-            event.stopPropagation();
+
         });
         $("#buy").click(function () {
             console.log("aa")
