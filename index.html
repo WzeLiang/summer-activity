@@ -25,21 +25,23 @@
         }
 
         #read {
+            /*border:solid 1px red;*/
             position: absolute;
             z-index: 1000;
-            height: .5rem;
-            width: 1.2rem;
-            margin-top: 2.8rem;
-            margin-left: 5rem;
+            height: .7rem;
+            width: 1.8rem;
+            margin-top: 2.65rem;
+            margin-left: 4.55rem;
         }
 
         #buy {
+            /*border:solid 1px red;*/
             position: absolute;
             z-index: 1000;
-            height: .5rem;
-            width: 1.6rem;
-            margin-top: 10.4rem;
-            margin-left: 2.4rem;
+            height: .9rem;
+            width: 2.2rem;
+            margin-top: 10.2rem;
+            margin-left: 2.1rem;
         }
         /*modal*/
         #active-cont{
@@ -136,11 +138,12 @@
 //        var w = document.documentElement.clientWidth || document.body.clientWidth;
 //        console.log(w)
 //        html.style.fontSize=w/750+"px";
-        $("#read").click(function () {
+        $("#read").click(function (event) {
             $("#active-cont").modal({
                 backdrop: true,
                 keyboard: false,
             })
+            event.stopPropagation();
         });
         $("#buy").click(function () {
             console.log("aa")
