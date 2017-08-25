@@ -2,61 +2,43 @@
 <head>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>太平洋联盟夏日畅打活动</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="src/bootstrap.min.css">
     <style>
-        body{
-            background: url("img/activity.jpg") no-repeat;
+        body {
+            background: url("./img/open-app.png") no-repeat;
             background-size: 100% 100%;
-            -webkit-background-size: 100% 100%;
-            -moz-background-size: 100% 100%;
         }
-
+        p{
+            margin: 0;
+        }
         #planetmap {
             position: relative;
-            height: 100% !important;
-            width: 100% !important;
-
+            height: 100px !important;
+            width: 100px !important;
         }
 
         #read{
-            position: absolute;
-            z-index: 1000;
-            height: .7rem;
-            width: 1.8rem;
-            top: 2.35rem;
-            right: .2rem;
-        }
-
-        #buy{
+            border: solid 1px red;
             position: absolute;
             z-index: 1000;
             height: 1rem;
-            width: 2.2rem;
-            bottom: 0.2rem;
-            left: 2.1rem;
+            width: 3.4rem;
+            margin-top: 7.75rem;
+            margin-left: 1.55rem;
         }
-        /*modal*/
-        #active-cont{
-            padding-top: 20%;
-
+        #tip{
+            display: none;
+            padding: .1rem .2rem;
+            position: absolute;
+            z-index: 1000;
+            height: 1rem;
+            width:6rem;
+            background: white;
+            margin-left: .2rem;
         }
-        #active-cont .modal-header{
-            padding-bottom: 0;
-        }
-        #active-cont .modal-header h4{
-            font-size: .27rem;
-            font-weight: bold;
-        }
-        #active-cont .modal-body ul{
-            padding-left: .05rem;
-            font-size: .25rem;
-            list-style: none;
-        }
-        #active-cont .modal-body ul li{
-            margin-bottom: .1rem;
+        #tip>.p1{
+           /* font-size: .3rem;*/
         }
     </style>
     <script>
@@ -82,62 +64,28 @@
     </script>
 </head>
 <body>
-<div class="hidden">
-    <img src="img/aa.jpg" alt="">
-</div>
+
 
 
 
 <div  id="planetmap">
-
-    <div id="read"
-
-         alt="Sun"/></div>
-    <div id="buy"
-
-     alt="Sun"/></div>
-</div>
-<div class="modal fade" id="active-cont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-                <h4 class="text-center">活动规则</h4>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <li>一、活动期间使用太平洋联盟APP在指定活动球场订场且本人到场完成打球，每完成四次打球，赠送一张北京宝兴高尔夫俱乐部免费打球券。</li>
-                    <li>二、活动时间：8月1日0:00—8月31日24:00</li>
-                    <li>三、活动球场：北京东方双鹰高尔夫俱乐部、北京宝兴高尔夫俱乐部、北京金色河畔高尔夫俱乐部、北京森林假日高尔夫俱乐部、北京乡村高尔夫俱乐部。</li>
-                    <li>四、活动仅限国际卡会员。</li>
-                    <li>五、免费打球券会在活动结束后1-3个工作日内发送到您的APP账户内。</li>
-                    <li>六、免费打球券有效期为自发放日起2周且仅限本人在APP上使用。</li>
-                    <li>七、活动最终解释权归太平洋联盟所有。</li>
-                </ul>
-            </div>
-        </div><!-- /.modal-content -->
+    <div id="tip" alt="Sun" />
+        <p class="p1">在微信中无法打开？</p>
+        <p class="p2">点击右上角，选择在safari中打开</p>
     </div>
-</div><!-- /.modal -->
+    <div id="read" alt="Sun" onclick="oppeapp()"/></div>
+</div>
 <script src="src/jquery.min.js"></script>
-<script src="src/bootstrap.min.js"></script>
 <script>
-    $(function () {
-//        var html = document.getElementsByTagName('html')[0];
-//        var w = document.documentElement.clientWidth || document.body.clientWidth;
-//        console.log(w)
-//        html.style.fontSize=w/750+"px";
-        $("#read").click(function (event) {
-            $("#active-cont").modal({
-                backdrop: true,
-                keyboard: false,
-            })
+    function oppeapp() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+           $("#tip").css("display","block")
+        } else {
+            alert("不是微信浏览器");
+        }
+    }
 
-        });
-        $("#buy").click(function () {
-           alert("aa")
-        })
-
-    })
 </script>
 </body>
 </html>
