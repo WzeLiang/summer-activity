@@ -1,15 +1,31 @@
-﻿<html>
+﻿<!DOCTYPE html>
+
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="src/bootstrap.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <style>
-        body {
-            background: url("./img/open-app.png") no-repeat;
-            background-size: 100% 100%;
+        *{
+            padding:0;
+            margin:0;
+        }
+        .back-img{
+            position: absolute;
+            top: 0%;
+            left: 0;
+            z-index: -100;
+            height: 100%;
+            width: 100%;
+        }
+        .back-img img{
+            width:100%;
         }
         p{
+            margin: 0;
+        }
+        .row{
             margin: 0;
         }
         #planetmap {
@@ -22,23 +38,43 @@
             border: solid 1px red;
             position: absolute;
             z-index: 1000;
-            height: 1rem;
+            height: 1.5rem;
             width: 3.4rem;
-            margin-top: 6.75rem;
+            margin-top: 7.5rem;
             margin-left: 1.55rem;
         }
-        #tip{
+        .mode{
             display: none;
+            height: 100%;
+            width: 100%;
+            margin:0;
+            position: fixed;
+        }
+        .mode #tip{
+
             padding: .1rem .2rem;
             position: absolute;
             z-index: 1000;
-            height: 1rem;
-            width:6rem;
+            height: 10%;
+            width:6.4rem;
             background: white;
-            margin-left: .2rem;
         }
-        #tip>.p1{
-           /* font-size: .3rem;*/
+        .mode #tip>.p1{
+            font-size: .25rem;
+            width:100%;
+            margin-bottom: .15rem;
+        }
+        .mode #tip>.p2{
+            font-size: .23rem;
+
+        }
+        .mode #tip>.p1 img{
+            width: .3rem;
+            margin-left:3rem;
+        }
+        .mode .black{
+            background: rgba(0,0,0,.3);
+            height:95%;
         }
     </style>
     <script>
@@ -66,26 +102,69 @@
 <body>
 
 
-
+<div class="back-img">
+    <img alt="" src="./img/open-app.jpg">
+</div>
 
 <div  id="planetmap">
-    <div id="tip" alt="Sun" />
-        <p class="p1">在微信中无法打开？</p>
-        <p class="p2">点击右上角，选择在safari中打开</p>
+    <div class="mode">
+        <div id="tip" alt="Sun" />
+        <p class="p1 row">在微信中无法打开？<img class="pull-right" src="./img/up-right.png" alt=""></p>
+        <p class="p2">点击右上角，选择在浏览器中打开</p>
     </div>
-    <div id="read" alt="Sun" onclick="oppeapp()"/></div>
+    <div class="black"></div>
+</div>
+<div id="read" alt="Sun" onclick="oppeapp()"/></div>
 </div>
 <script src="src/jquery.min.js"></script>
 <script>
     function oppeapp() {
         var ua = window.navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-           $("#tip").css("display","block")
+            $(".mode").css("display","block")
         } else {
-            alert("不是微信浏览器");
+            var url = document.URL;
+            var para = "";
+            if (url.lastIndexOf("/") > 0) {
+                para = url.substring(url.lastIndexOf("/")+1, url.length);
+                var browser={
+                    versions:function(){
+                        var u = navigator.userAgent, app = navigator.appVersion;
+                        return {//移动终端浏览器版本信息
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/)||!!u.match(/AppleWebKit/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否iPad
+                            webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                        };
+                    }(),
+                    language:(navigator.browserLanguage || navigator.language).toLowerCase()
+                }
+                if(browser.versions.iPhone){
+                    //跳转到iPhone界面
+                    window.location.href="itms-apps://itunes.apple.com/us/app/%E6%99%AE%E5%88%A9%E8%8D%9F/id1268476538?mt=8";
+                    //window.location.href="http://localhost:8080/married/iosIndex?userid="+para;
+                }else if(browser.versions.android){
+                    //跳转到android界面
+                    window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.pacificlinks.app";
+                    //window.location.href="http://localhost:8080/married/download.jsp?userid="+para;
+                }else{
+                    window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.pacificlinks.app";
+                    //window.location.href="http://localhost:8080/married/aosIndex?userid="+para;
+                }
+            }
         }
     }
-
+    $(function () {
+        $(".black").click(function () {
+            $(".mode").css("display","none")
+        })
+    })
 </script>
 </body>
 </html>
